@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quantidade:</strong>
+  <%= @remedy.quantidade %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @remedy.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @remedy.user %>
+</p>
+
+<%= link_to 'Edit', edit_remedy_path(@remedy) %> |
+<%= link_to 'Back', remedies_path %>

@@ -1,0 +1,29 @@
+<h1>Listing remedies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Quantidade</th>
+      <th>Name</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @remedies.each do |remedy| %>
+      <tr>
+        <td><%= remedy.quantidade %></td>
+        <td><%= remedy.name %></td>
+        <td><%= remedy.user %></td>
+        <td><%= link_to 'Show', remedy %></td>
+        <td><%= link_to 'Edit', edit_remedy_path(remedy) %></td>
+        <td><%= link_to 'Destroy', remedy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Remedy', new_remedy_path %>

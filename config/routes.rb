@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :remedies
+
   resources :allergies
 
   resources :diseases
