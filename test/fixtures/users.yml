@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  sangue: 
+  peso: MyString
+  altura: MyString
+  pressao: MyString
+
+two:
+  email: MyString
+  sangue: 
+  peso: MyString
+  altura: MyString
+  pressao: MyString
