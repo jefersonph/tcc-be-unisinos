@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :allergies
+
   resources :diseases
 
   resources :users
