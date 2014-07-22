@@ -20,6 +20,9 @@
         <td><%= user.peso %></td>
         <td><%= user.altura %></td>
         <td><%= user.pressao %></td>
+        <td><%= link_to 'allergies', user_allergies_path(user) %></td>
+        <td><%= link_to 'diseases', user_diseases_path(user) %></td>
+        <td><%= link_to 'remedies', user_remedies_path(user) %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>

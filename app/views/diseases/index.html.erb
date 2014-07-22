@@ -13,10 +13,10 @@
     <% @diseases.each do |disease| %>
       <tr>
         <td><%= disease.name %></td>
-        <td><%= disease.user %></td>
-        <td><%= link_to 'Show', disease %></td>
-        <td><%= link_to 'Edit', edit_disease_path(disease) %></td>
-        <td><%= link_to 'Destroy', disease, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= disease.user_id %></td>
+        <td><%= link_to 'Show', user_disease_path(disease.user_id, disease) %></td>
+        <td><%= link_to 'Edit', edit_user_disease_path(disease.user_id, disease) %></td>
+        <td><%= link_to 'Destroy', user_disease_path(disease.user_id, disease), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Disease', new_disease_path %>
+<%= link_to 'New Disease', new_user_disease_path %>

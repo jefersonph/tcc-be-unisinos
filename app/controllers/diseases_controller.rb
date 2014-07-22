@@ -4,31 +4,35 @@ class DiseasesController < ApplicationController
   # GET /diseases
   # GET /diseases.json
   def index
-    @diseases = Disease.all
+    @diseases = User.find_by_id(params[:user_id]).disease
   end
 
   # GET /diseases/1
   # GET /diseases/1.json
   def show
+    @diseases = User.find_by_id(params[:user_id]).disease.find_by_id(params[:id])
   end
 
   # GET /diseases/new
   def new
-    @disease = Disease.new
+    @user = User.find_by_id(params[:user_id])
+    @disease = @user.disease.new
   end
 
   # GET /diseases/1/edit
   def edit
+    @user = User.find_by_id(params[:user_id])
+    @disease = @user.disease.find_by_id(params[:id])
   end
 
   # POST /diseases
   # POST /diseases.json
   def create
-    @disease = Disease.new(disease_params)
+    @disease = User.find_by_id(params[:user_id]).disease.create(disease_params)
 
     respond_to do |format|
       if @disease.save
-        format.html { redirect_to @disease, notice: 'Disease was successfully created.' }
+        format.html { redirect_to user_diseases_path(params[:user_id]), notice: 'Disease was successfully created.' }
         format.json { render :show, status: :created, location: @disease }
       else
         format.html { render :new }
@@ -40,9 +44,11 @@ class DiseasesController < ApplicationController
   # PATCH/PUT /diseases/1
   # PATCH/PUT /diseases/1.json
   def update
+    @disease = User.find_by_id(params[:user_id]).disease.find_by_id(params[:id])
+
     respond_to do |format|
       if @disease.update(disease_params)
-        format.html { redirect_to @disease, notice: 'Disease was successfully updated.' }
+        format.html { redirect_to user_diseases_path(params[:user_id]), notice: 'Disease was successfully updated.' }
         format.json { render :show, status: :ok, location: @disease }
       else
         format.html { render :edit }
@@ -54,9 +60,11 @@ class DiseasesController < ApplicationController
   # DELETE /diseases/1
   # DELETE /diseases/1.json
   def destroy
+    @allergy = User.find_by_id(params[:user_id]).disease.find_by_id(params[:id])
     @disease.destroy
+    
     respond_to do |format|
-      format.html { redirect_to diseases_url, notice: 'Disease was successfully destroyed.' }
+      format.html { redirect_to user_diseases_url, notice: 'Disease was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,7 +72,7 @@ class DiseasesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_disease
-      @disease = Disease.find(params[:id])
+      @disease = User.find_by_id(params[:user_id]).disease.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

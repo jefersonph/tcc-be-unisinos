@@ -7,8 +7,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @disease.user %>
+  <%= @disease.user_id %>
 </p>
 
-<%= link_to 'Edit', edit_disease_path(@disease) %> |
-<%= link_to 'Back', diseases_path %>
+<%= link_to 'Back', user_diseases_path %>

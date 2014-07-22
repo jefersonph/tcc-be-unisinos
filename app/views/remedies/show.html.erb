@@ -12,8 +12,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @remedy.user %>
+  <%= @remedy.user_id %>
 </p>
 
-<%= link_to 'Edit', edit_remedy_path(@remedy) %> |
-<%= link_to 'Back', remedies_path %>
+<%= link_to 'Back', user_remedies_path %>

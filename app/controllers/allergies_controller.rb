@@ -4,31 +4,36 @@ class AllergiesController < ApplicationController
   # GET /allergies
   # GET /allergies.json
   def index
-    @allergies = Allergy.all
+    @allergies =  User.find_by_id(params[:user_id]).allergy
   end
 
   # GET /allergies/1
   # GET /allergies/1.json
   def show
+    @allergy = User.find_by_id(params[:user_id]).allergy.find_by_id(params[:id])
   end
 
   # GET /allergies/new
   def new
-    @allergy = Allergy.new
+    @user = User.find_by_id(params[:user_id])
+    @allergy = @user.allergy.new
   end
 
   # GET /allergies/1/edit
   def edit
+    @user = User.find_by_id(params[:user_id])
+    @allergy = @user.allergy.find_by_id(params[:id])
   end
 
   # POST /allergies
   # POST /allergies.json
   def create
-    @allergy = Allergy.new(allergy_params)
+    
+    @allergy = User.find_by_id(params[:user_id]).allergy.create(allergy_params)
 
     respond_to do |format|
       if @allergy.save
-        format.html { redirect_to @allergy, notice: 'Allergy was successfully created.' }
+        format.html { redirect_to user_allergies_path(params[:user_id]), notice: 'Allergy was successfully created.' }
         format.json { render :show, status: :created, location: @allergy }
       else
         format.html { render :new }
@@ -40,9 +45,11 @@ class AllergiesController < ApplicationController
   # PATCH/PUT /allergies/1
   # PATCH/PUT /allergies/1.json
   def update
+    @allergy = User.find_by_id(params[:user_id]).allergy.find_by_id(params[:id])
+
     respond_to do |format|
       if @allergy.update(allergy_params)
-        format.html { redirect_to @allergy, notice: 'Allergy was successfully updated.' }
+        format.html { redirect_to user_allergies_path(params[:user_id]), notice: 'Allergy was successfully updated.' }
         format.json { render :show, status: :ok, location: @allergy }
       else
         format.html { render :edit }
@@ -54,9 +61,11 @@ class AllergiesController < ApplicationController
   # DELETE /allergies/1
   # DELETE /allergies/1.json
   def destroy
+    @allergy = User.find_by_id(params[:user_id]).allergy.find_by_id(params[:id])
     @allergy.destroy
+
     respond_to do |format|
-      format.html { redirect_to allergies_url, notice: 'Allergy was successfully destroyed.' }
+      format.html { redirect_to user_allergies_path(params[:user_id]), notice: 'Allergy was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,7 +73,7 @@ class AllergiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_allergy
-      @allergy = Allergy.find(params[:id])
+      @allergy = User.find_by_id(params[:user_id]).allergy.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,4 +1,4 @@
-<%= form_for(@remedy) do |f| %>
+<%= form_for [@user ,@remedy] do |f| %>
   <% if @remedy.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@remedy.errors.count, "error") %> prohibited this remedy from being saved:</h2>

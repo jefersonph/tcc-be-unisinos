@@ -7,8 +7,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @allergy.user %>
+  <%= @allergy.user_id %>
 </p>
 
-<%= link_to 'Edit', edit_allergy_path(@allergy) %> |
-<%= link_to 'Back', allergies_path %>
+<%= link_to 'Back', user_allergies_path %>

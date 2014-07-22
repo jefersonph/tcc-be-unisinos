@@ -4,31 +4,35 @@ class RemediesController < ApplicationController
   # GET /remedies
   # GET /remedies.json
   def index
-    @remedies = Remedy.all
+    @remedies =  User.find_by_id(params[:user_id]).remedy
   end
 
   # GET /remedies/1
   # GET /remedies/1.json
   def show
+    @remedy = User.find_by_id(params[:user_id]).remedy.find_by_id(params[:id])
   end
 
   # GET /remedies/new
   def new
-    @remedy = Remedy.new
+    @user = User.find_by_id(params[:user_id])
+    @remedy = @user.remedy.new
   end
 
   # GET /remedies/1/edit
   def edit
+    @user = User.find_by_id(params[:user_id])
+    @remedy = @user.remedy.find_by_id(params[:id])
   end
 
   # POST /remedies
   # POST /remedies.json
   def create
-    @remedy = Remedy.new(remedy_params)
+    @remedy = User.find_by_id(params[:user_id]).remedy.create(remedy_params)
 
     respond_to do |format|
       if @remedy.save
-        format.html { redirect_to @remedy, notice: 'Remedy was successfully created.' }
+        format.html { redirect_to user_remedies_path(params[:user_id]), notice: 'Remedy was successfully created.' }
         format.json { render :show, status: :created, location: @remedy }
       else
         format.html { render :new }
@@ -40,9 +44,11 @@ class RemediesController < ApplicationController
   # PATCH/PUT /remedies/1
   # PATCH/PUT /remedies/1.json
   def update
+    @remedy = User.find_by_id(params[:user_id]).remedy.find_by_id(params[:id])
+
     respond_to do |format|
       if @remedy.update(remedy_params)
-        format.html { redirect_to @remedy, notice: 'Remedy was successfully updated.' }
+        format.html { redirect_to user_remedies_path(params[:user_id]), notice: 'Remedy was successfully updated.' }
         format.json { render :show, status: :ok, location: @remedy }
       else
         format.html { render :edit }
@@ -54,9 +60,11 @@ class RemediesController < ApplicationController
   # DELETE /remedies/1
   # DELETE /remedies/1.json
   def destroy
+    @remedy = User.find_by_id(params[:user_id]).remedy.find_by_id(params[:id])
     @remedy.destroy
+    
     respond_to do |format|
-      format.html { redirect_to remedies_url, notice: 'Remedy was successfully destroyed.' }
+      format.html { redirect_to user_remedies_url, notice: 'Remedy was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,7 +72,7 @@ class RemediesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_remedy
-      @remedy = Remedy.find(params[:id])
+      @remedy = User.find_by_id(params[:user_id]).remedy.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,3 +1,3 @@
-class Allergy < ActiveRecord::Base
+	class Allergy < ActiveRecord::Base
   belongs_to :user
 end
